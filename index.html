@@ -53,10 +53,7 @@
     #header .logo-header {
       height: 52px;
       object-fit: contain;
-      filter: brightness(0) invert(1);
-      transition: filter 0.4s;
     }
-    #header.scrolled .logo-header { filter: none; }
 
     nav { display: flex; gap: 32px; align-items: center; }
     nav a {
@@ -132,7 +129,7 @@
       color: var(--white);
     }
     .hero-content { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 20px; }
-    .hero-logo { height: 100px; object-fit: contain; filter: brightness(0) invert(1); }
+    .hero-logo { height: 100px; object-fit: contain; }
     .hero-tagline {
       font-family: var(--font-title);
       font-size: clamp(18px, 3vw, 28px);
@@ -492,7 +489,7 @@
       max-width: 1000px;
       margin: 0 auto 40px;
     }
-    .footer-logo { height: 56px; object-fit: contain; filter: brightness(0) invert(1); margin-bottom: 16px; }
+    .footer-logo { height: 56px; object-fit: contain; margin-bottom: 16px; }
     .footer-col h4 {
       font-family: var(--font-title);
       font-size: 18px;
