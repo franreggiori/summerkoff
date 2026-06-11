@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Summerkoff | Salón de Belleza Premium</title>
+  <meta name="description" content="Summerkoff - Salón de belleza premium en Buenos Aires. Uñas, cejas, pestañas, masajes y bronceado natural. Dos locales: Caballito y Villa Luro." />
+  <meta property="og:title" content="Summerkoff | Salón de Belleza Premium" />
+  <meta property="og:description" content="Experiencia de belleza de nivel europeo en el corazón de Buenos Aires." />
+  <meta property="og:image" content="logo.png" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8D48B;
+      --black: #1a1a1a;
+      --cream: #FAF6F0;
+      --white: #ffffff;
+      --font-title: 'Cormorant Garamond', serif;
+      --font-body: 'Montserrat', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--black);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    #header.scrolled {
+      background: var(--white);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    }
+    #header .logo-header {
+      height: 52px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      transition: filter 0.4s;
+    }
+    #header.scrolled .logo-header { filter: none; }
+
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--white);
+      transition: color 0.3s;
+    }
+    #header.scrolled nav a { color: var(--black); }
+    nav a:hover { color: var(--gold); }
+    #header.scrolled nav a:hover { color: var(--gold); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: background 0.4s, transform 0.3s, opacity 0.3s;
+    }
+    #header.scrolled .hamburger span { background: var(--black); }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--white);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-title);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: 2px;
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.38)),
+        url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80') center/cover no-repeat;
+      color: var(--white);
+    }
+    .hero-content { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 20px; }
+    .hero-logo { height: 100px; object-fit: contain; filter: brightness(0) invert(1); }
+    .hero-tagline {
+      font-family: var(--font-title);
+      font-size: clamp(18px, 3vw, 28px);
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: 3px;
+      color: var(--gold-light);
+    }
+    .btn-cta {
+      display: inline-block;
+      padding: 14px 40px;
+      border: 1.5px solid var(--gold-light);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn-cta:hover { background: var(--gold); border-color: var(--gold); color: var(--white); }
+    .scroll-arrow {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    }
+    .scroll-arrow span {
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-right: 1.5px solid var(--gold-light);
+      border-bottom: 1.5px solid var(--gold-light);
+      transform: rotate(45deg);
+    }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+    /* ── SECTIONS GENERAL ── */
+    section { padding: 90px 40px; }
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+    .section-title span { color: var(--gold); }
+    .section-subtitle {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .divider {
+      width: 50px;
+      height: 1px;
+      background: var(--gold);
+      margin: 20px auto;
+    }
+    .divider.left { margin: 20px 0; }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── QUIÉNES SOMOS ── */
+    #quienes { background: var(--cream); }
+    .quienes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .quienes-text p {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: #444;
+      margin-bottom: 16px;
+    }
+    .quienes-text p:last-child { margin-bottom: 0; }
+    .quienes-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── SERVICIOS ── */
+    #servicios { background: var(--white); }
+    .servicios-inner { max-width: 1100px; margin: 0 auto; }
+    .servicios-inner > .section-subtitle,
+    .servicios-inner > .section-title,
+    .servicios-inner > .divider { text-align: center; }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 36px 0 40px;
+    }
+    .tab-btn {
+      background: none;
+      border: 1.5px solid #ddd;
+      padding: 10px 20px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      cursor: pointer;
+      color: #777;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+    .tab-btn:hover, .tab-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,0.06);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      border: 1px solid #eee;
+      padding: 24px 20px;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      cursor: default;
+    }
+    .service-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 4px 24px rgba(201,168,76,0.15);
+      transform: translateY(-3px);
+    }
+    .service-card h4 {
+      font-family: var(--font-title);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--black);
+      line-height: 1.3;
+    }
+    .service-card .service-cat {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .subsection-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 28px 0 14px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #f0e8d8;
+    }
+
+    /* ── LOCALES ── */
+    #locales { background: var(--cream); }
+    .locales-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .locales-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 48px;
+    }
+    .local-card {
+      background: var(--white);
+      border: 1px solid #eee;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      transition: box-shadow 0.3s;
+    }
+    .local-card:hover { box-shadow: 0 8px 32px rgba(201,168,76,0.12); }
+    .local-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(201,168,76,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .local-icon svg { width: 22px; height: 22px; fill: var(--gold); }
+    .local-card h3 {
+      font-family: var(--font-title);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--black);
+    }
+    .local-card p {
+      font-size: 14px;
+      font-weight: 300;
+      color: #666;
+      line-height: 1.7;
+      text-align: center;
+    }
+    .btn-map {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 11px 28px;
+      background: var(--gold);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn-map:hover { background: #a8873a; }
+
+    /* ── FRANQUICIAS ── */
+    #franquicias { background: var(--black); color: var(--white); }
+    #franquicias .section-title { color: var(--white); }
+    .franquicias-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .franquicias-inner .section-subtitle { color: var(--gold-light); }
+    .franquicias-inner > p {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: #bbb;
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      text-align: left;
+    }
+    .form-grid .full { grid-column: 1 / -1; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--white);
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.3s;
+      border-radius: 2px;
+      width: 100%;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--gold); }
+    .form-group select option { background: #1a1a1a; }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .btn-submit {
+      margin-top: 24px;
+      padding: 14px 48px;
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn-submit:hover { background: #a8873a; }
+
+    /* ── TRABAJA CON NOSOTROS ── */
+    #trabaja { background: var(--cream); }
+    .trabaja-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .trabaja-inner > p {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+    .trabaja-inner .form-grid { text-align: left; }
+    .trabaja-inner .form-group label { color: var(--gold); }
+    .trabaja-inner .form-group input,
+    .trabaja-inner .form-group textarea,
+    .trabaja-inner .form-group select {
+      background: var(--white);
+      border: 1px solid #ddd;
+      color: var(--black);
+    }
+    .trabaja-inner .form-group input:focus,
+    .trabaja-inner .form-group textarea:focus,
+    .trabaja-inner .form-group select:focus { border-color: var(--gold); }
+    .trabaja-inner .form-group select option { background: var(--white); color: var(--black); }
+
+    .checkbox-group { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 4px; }
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--black);
+      letter-spacing: 0;
+      text-transform: none;
+      cursor: pointer;
+    }
+    .checkbox-group input[type="checkbox"] { accent-color: var(--gold); width: 16px; height: 16px; }
+
+    /* ── FOOTER ── */
+    #footer {
+      background: var(--black);
+      color: #aaa;
+      padding: 60px 40px 30px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto 40px;
+    }
+    .footer-logo { height: 56px; object-fit: contain; filter: brightness(0) invert(1); margin-bottom: 16px; }
+    .footer-col h4 {
+      font-family: var(--font-title);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .footer-col a, .footer-col p {
+      display: block;
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 2;
+      color: #aaa;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-social { display: flex; gap: 16px; margin-top: 16px; }
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s;
+    }
+    .footer-social a:hover { border-color: var(--gold); }
+    .footer-social svg { width: 16px; height: 16px; fill: #aaa; transition: fill 0.3s; }
+    .footer-social a:hover svg { fill: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid #2a2a2a;
+      padding-top: 24px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 300;
+      color: #555;
+      letter-spacing: 1px;
+    }
+
+    /* ── WHATSAPP FLOTANTE ── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      width: 58px;
+      height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+      animation: pulse-wa 2.5s infinite;
+    }
+    .wa-float svg { width: 30px; height: 30px; fill: var(--white); }
+    @keyframes pulse-wa {
+      0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+      70% { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
+      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      section { padding: 70px 24px; }
+      #header { padding: 16px 24px; }
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .quienes-grid { grid-template-columns: 1fr; gap: 36px; }
+      .quienes-img { aspect-ratio: 16/9; }
+      .locales-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-grid .full { grid-column: 1; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-logo { height: 72px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <img src="logo.png" alt="Summerkoff" class="logo-header" />
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#locales">Locales</a>
+    <a href="#franquicias">Franquicias</a>
+    <a href="#trabaja">Trabajá con nosotros</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#inicio" class="mobile-link">Inicio</a>
+  <a href="#servicios" class="mobile-link">Servicios</a>
+  <a href="#locales" class="mobile-link">Locales</a>
+  <a href="#franquicias" class="mobile-link">Franquicias</a>
+  <a href="#trabaja" class="mobile-link">Trabajá con nosotros</a>
+</div>
+
+<!-- HERO -->
+<section id="inicio" style="padding:0;">
+  <div id="hero">
+    <div class="hero-content">
+      <img src="logo.png" alt="Summerkoff" class="hero-logo" />
+      <p class="hero-tagline">Donde la belleza se convierte en ritual</p>
+      <a href="https://wa.me/5491140935791?text=Hola!%20Quiero%20sacar%20un%20turno%20%F0%9F%98%8A" target="_blank" class="btn-cta">Reservar turno</a>
+    </div>
+    <div class="scroll-arrow" onclick="document.getElementById('quienes').scrollIntoView({behavior:'smooth'})">
+      <span></span>
+    </div>
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section id="quienes">
+  <div class="quienes-grid">
+    <div class="quienes-text fade-in">
+      <p class="section-subtitle">Nuestra historia</p>
+      <h2 class="section-title">Quiénes <span>somos</span></h2>
+      <div class="divider left"></div>
+      <p>Summerkoff nació de una pasión genuina por el cuidado personal y la belleza consciente. Somos un equipo de profesionales apasionadas que creemos que cada persona merece sentirse extraordinaria en su día a día.</p>
+      <p>Con más de una década de experiencia en el mundo de la estética, combinamos técnicas de vanguardia con productos de primera línea para ofrecerte resultados que hablan por sí solos. Cada visita a Summerkoff es una experiencia diseñada para que salgas renovada, segura y radiante.</p>
+      <p>Nos inspiramos en los mejores salones europeos para crear un espacio donde el lujo, la calidez y el profesionalismo conviven en perfecta armonía. Porque la belleza no es un lujo, es una forma de vida.</p>
+    </div>
+    <div class="fade-in" style="overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80" alt="Summerkoff salón de belleza" class="quienes-img" />
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="servicios-inner">
+    <p class="section-subtitle fade-in">Lo que hacemos</p>
+    <h2 class="section-title fade-in">Nuestros <span>servicios</span></h2>
+    <div class="divider fade-in"></div>
+
+    <div class="tabs fade-in">
+      <button class="tab-btn active" data-tab="manos">&#128133; Manos</button>
+      <button class="tab-btn" data-tab="pies">&#129463; Pies</button>
+      <button class="tab-btn" data-tab="cejas">&#129518; Cejas</button>
+      <button class="tab-btn" data-tab="pestanas">&#128065; Pestañas</button>
+      <button class="tab-btn" data-tab="masajes">&#128134; Masajes</button>
+      <button class="tab-btn" data-tab="bronceado">&#127774; Bronceado</button>
+    </div>
+
+    <!-- MANOS -->
+    <div class="tab-content active" id="tab-manos">
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-cat">Manos</span>
+          <h4>Belleza de manos Mujer/Hombres con Exfoliación</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Manos</span>
+          <h4>Esmaltado Tradicional Niña (hasta 10 años)</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Manos</span>
+          <h4>Esmaltado Tradicional Manos</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Manos</span>
+          <h4>Esmalte Semipermanente</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Manos</span>
+          <h4>Esmalte Fortalecedor</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Manos</span>
+          <h4>Capping</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Manos</span>
+          <h4>Capping Largo XL N°3</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Manos</span>
+          <h4>Soft Gel</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Manos</span>
+          <h4>Esculpidas en Polygel</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Manos</span>
+          <h4>Esculpidas en Polygel (a partir N°4)</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Manos</span>
+          <h4>Service Esculpidas / Soft Gel</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIES -->
+    <div class="tab-content" id="tab-pies">
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-cat">Pies</span>
+          <h4>Belleza de Pies (no incluye durezas)</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pies</span>
+          <h4>Esmaltado Tradicional</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pies</span>
+          <h4>Esmalte Semipermanente</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pies</span>
+          <h4>Capping Pies</h4>
+        </div>
+      </div>
+      <div class="subsection-label">Podoestetica</div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-cat">Podoestetica</span>
+          <h4>PodoEstetica SIN esmaltado</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Podoestetica</span>
+          <h4>PodoEstetica con Tradicional</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Podoestetica</span>
+          <h4>PodoEstetica con Semipermanente</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Podoestetica</span>
+          <h4>PodoEstetica con Capping</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- CEJAS -->
+    <div class="tab-content" id="tab-cejas">
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-cat">Cejas</span>
+          <h4>Perfilado</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Cejas</span>
+          <h4>Henna + Perfilado</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Cejas</span>
+          <h4>Tinte (ideal canas) / Henna</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Cejas</span>
+          <h4>Laminado</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Cejas</span>
+          <h4>Laminado Nutritivo + Perfilado</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Cejas</span>
+          <h4>Laminado Nutritivo + Perfilado + Henna o Tinte</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESTAÑAS -->
+    <div class="tab-content" id="tab-pestanas">
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-cat">Pestañas</span>
+          <h4>Lifting Nutritivo (Botox Melania)</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pestañas</span>
+          <h4>Lifting Nutritivo c/Tinte (Botox Melania)</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pestañas</span>
+          <h4>Botox sin Tinte</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pestañas</span>
+          <h4>Botox con Tinte</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pestañas</span>
+          <h4>Clásicas PxP / Service Ext. Clásicas</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pestañas</span>
+          <h4>Volumen Bajo - Efecto Rimel / Service Efecto Rimel</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pestañas</span>
+          <h4>Volumen Medio 3D / Service Volumen Medio</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pestañas</span>
+          <h4>Volumen Alto 4 o 5 / Service Volumen Alto</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pestañas</span>
+          <h4>Volumen Ruso / Service Volumen Ruso</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pestañas</span>
+          <h4>Mega Volumen / Service Mega Volumen</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Pestañas</span>
+          <h4>Tecnológicas MAS / Service Tecnológicas MAS</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- MASAJES -->
+    <div class="tab-content" id="tab-masajes">
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-cat">Masajes</span>
+          <h4>Masaje Relajante / Descontracturante 30 min</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Masajes</span>
+          <h4>Masaje Relajante / Descontracturante 60 min</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Masajes</span>
+          <h4>Masaje Relajante / Descontracturante 90 min</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Masajes</span>
+          <h4>Drenaje Linfático 60 min</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Masajes</span>
+          <h4>Maderoterapia x Zonas 60 min</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Masajes</span>
+          <h4>Masaje Reductor</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRONCEADO -->
+    <div class="tab-content" id="tab-bronceado">
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-cat">Bronceado Natural</span>
+          <h4>Cuerpo Completo (cuerpo y rostro)</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Bronceado Natural</span>
+          <h4>Medio Cuerpo (cintura para arriba con rostro)</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Bronceado Natural</span>
+          <h4>Solo Piernas</h4>
+        </div>
+        <div class="service-card">
+          <span class="service-cat">Bronceado Natural</span>
+          <h4>Rostro y Escote</h4>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LOCALES -->
+<section id="locales">
+  <div class="locales-inner">
+    <p class="section-subtitle fade-in">Dónde encontrarnos</p>
+    <h2 class="section-title fade-in">Nuestros <span>locales</span></h2>
+    <div class="divider fade-in"></div>
+    <div class="locales-grid">
+      <div class="local-card fade-in">
+        <div class="local-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <h3>Caballito</h3>
+        <p>Víctor Martínez 35<br />Caballito, Buenos Aires<br /><br />Tel: 9 11 4093-5791</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Victor+Martinez+35+Caballito+Buenos+Aires" target="_blank" class="btn-map">Ver en Maps</a>
+      </div>
+      <div class="local-card fade-in">
+        <div class="local-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <h3>Villa Luro</h3>
+        <p>Ramón Falcón 6378<br />Villa Luro, Buenos Aires<br /><br />Tel: 9 11 4093-5791</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Ramon+Falcon+6378+Villa+Luro+Buenos+Aires" target="_blank" class="btn-map">Ver en Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRANQUICIAS -->
+<section id="franquicias">
+  <div class="franquicias-inner">
+    <p class="section-subtitle fade-in">Una oportunidad única</p>
+    <h2 class="section-title fade-in">Franquicias <span>Summerkoff</span></h2>
+    <div class="divider fade-in"></div>
+    <p class="fade-in">Sumarte a Summerkoff es sumarte a una marca con identidad, clientela fiel y procesos probados. Te brindamos todo el know-how, el respaldo de la marca y el acompañamiento para que puedas abrir tu propio local con confianza y visión de futuro.</p>
+    <form class="form-grid fade-in" id="formFranquicias">
+      <div class="form-group">
+        <label for="fr-nombre">Nombre completo</label>
+        <input type="text" id="fr-nombre" name="nombre" placeholder="Tu nombre y apellido" required />
+      </div>
+      <div class="form-group">
+        <label for="fr-email">Email</label>
+        <input type="email" id="fr-email" name="email" placeholder="tu@email.com" required />
+      </div>
+      <div class="form-group">
+        <label for="fr-tel">Teléfono</label>
+        <input type="tel" id="fr-tel" name="telefono" placeholder="+54 9 11 XXXX-XXXX" required />
+      </div>
+      <div class="form-group">
+        <label for="fr-ciudad">Ciudad / Provincia</label>
+        <input type="text" id="fr-ciudad" name="ciudad" placeholder="Buenos Aires" required />
+      </div>
+      <div class="form-group full">
+        <label for="fr-mensaje">Mensaje</label>
+        <textarea id="fr-mensaje" name="mensaje" placeholder="Contanos un poco sobre vos y por qué te interesa la franquicia..."></textarea>
+      </div>
+      <div class="full" style="text-align:center;">
+        <button type="submit" class="btn-submit">Enviar por WhatsApp</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- TRABAJÁ CON NOSOTROS -->
+<section id="trabaja">
+  <div class="trabaja-inner">
+    <p class="section-subtitle fade-in">Sumate al equipo</p>
+    <h2 class="section-title fade-in">Trabajá con <span>nosotros</span></h2>
+    <div class="divider fade-in"></div>
+    <p class="fade-in">En Summerkoff buscamos personas apasionadas por la belleza, con actitud profesional y ganas de crecer. Si sos especialista en tu rubro y querés trabajar en un ambiente de excelencia, este es tu lugar.</p>
+    <form class="form-grid fade-in" id="formTrabaja">
+      <div class="form-group">
+        <label for="tr-nombre">Nombre completo</label>
+        <input type="text" id="tr-nombre" name="nombre" placeholder="Tu nombre y apellido" required />
+      </div>
+      <div class="form-group">
+        <label for="tr-email">Email</label>
+        <input type="email" id="tr-email" name="email" placeholder="tu@email.com" required />
+      </div>
+      <div class="form-group">
+        <label for="tr-tel">Teléfono</label>
+        <input type="tel" id="tr-tel" name="telefono" placeholder="+54 9 11 XXXX-XXXX" required />
+      </div>
+      <div class="form-group">
+        <label for="tr-rubro">Servicio / Rubro</label>
+        <select id="tr-rubro" name="rubro" required>
+          <option value="" disabled selected>Seleccioná tu especialidad</option>
+          <option value="Uñas">Uñas</option>
+          <option value="Cejas">Cejas</option>
+          <option value="Pestañas">Pestañas</option>
+          <option value="Masajes">Masajes</option>
+          <option value="Bronceado">Bronceado</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="tr-exp">Años de experiencia</label>
+        <input type="number" id="tr-exp" name="experiencia" min="0" max="50" placeholder="Ej: 3" required />
+      </div>
+      <div class="form-group">
+        <label for="tr-salario">Salario pretendido</label>
+        <input type="text" id="tr-salario" name="salario" placeholder="Ej: $500.000" />
+      </div>
+      <div class="form-group full">
+        <label>Disponibilidad</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="disponibilidad" value="Mañana" /> Mañana</label>
+          <label><input type="checkbox" name="disponibilidad" value="Tarde" /> Tarde</label>
+          <label><input type="checkbox" name="disponibilidad" value="Noche" /> Noche</label>
+          <label><input type="checkbox" name="disponibilidad" value="Full time" /> Full time</label>
+        </div>
+      </div>
+      <div class="form-group full">
+        <label for="tr-fotos">Fotos de trabajos realizados</label>
+        <input type="file" id="tr-fotos" name="fotos" accept="image/*" multiple style="padding:10px 0;border:none;background:none;color:#666;" />
+      </div>
+      <div class="form-group full">
+        <label for="tr-mensaje">Mensaje</label>
+        <textarea id="tr-mensaje" name="mensaje" placeholder="Contanos sobre tu experiencia y por qué querés sumarte a Summerkoff..."></textarea>
+      </div>
+      <div class="full" style="text-align:center;">
+        <button type="submit" class="btn-submit">Enviar por WhatsApp</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <img src="logo.png" alt="Summerkoff" class="footer-logo" />
+      <p>Belleza de nivel europeo en el corazón de Buenos Aires.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <a href="#inicio">Inicio</a>
+      <a href="#quienes">Quiénes somos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#locales">Locales</a>
+      <a href="#franquicias">Franquicias</a>
+      <a href="#trabaja">Trabajá con nosotros</a>
+    </div>
+    <div class="footer-col">
+      <h4>Locales</h4>
+      <p>Víctor Martínez 35<br />Caballito, Buenos Aires</p>
+      <br />
+      <p>Ramón Falcón 6378<br />Villa Luro, Buenos Aires</p>
+      <br />
+      <p>Tel: 9 11 4093-5791</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 Summerkoff. Todos los derechos reservados.
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/5491140935791?text=Hola!%20Quiero%20sacar%20un%20turno%20%F0%9F%98%8A" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  // Header scroll effect
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Form Franquicias → WhatsApp
+  document.getElementById('formFranquicias').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nombre = this.nombre.value;
+    const email = this.email.value;
+    const tel = this.telefono.value;
+    const ciudad = this.ciudad.value;
+    const mensaje = this.mensaje.value;
+    const text = `*Consulta de Franquicia - Summerkoff*\n\n*Nombre:* ${nombre}\n*Email:* ${email}\n*Teléfono:* ${tel}\n*Ciudad/Provincia:* ${ciudad}\n*Mensaje:* ${mensaje}`;
+    window.open('https://wa.me/5491140935791?text=' + encodeURIComponent(text), '_blank');
+  });
+
+  // Form Trabajá con Nosotros → WhatsApp
+  document.getElementById('formTrabaja').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nombre = this.nombre.value;
+    const email = this.email.value;
+    const tel = this.telefono.value;
+    const rubro = this.rubro.value;
+    const exp = this.experiencia.value;
+    const salario = this.salario.value;
+    const disponibilidad = Array.from(this.querySelectorAll('input[name="disponibilidad"]:checked')).map(c => c.value).join(', ') || 'No especificada';
+    const mensaje = this.mensaje.value;
+    const text = `*Postulación Laboral - Summerkoff*\n\n*Nombre:* ${nombre}\n*Email:* ${email}\n*Teléfono:* ${tel}\n*Rubro:* ${rubro}\n*Experiencia:* ${exp} años\n*Disponibilidad:* ${disponibilidad}\n*Salario pretendido:* ${salario}\n*Mensaje:* ${mensaje}`;
+    window.open('https://wa.me/5491140935791?text=' + encodeURIComponent(text), '_blank');
+  });
+</script>
+</body>
+</html>
