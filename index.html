@@ -139,7 +139,7 @@
       padding: 20px;
     }
     .hero-logo {
-      height: 130px;
+      height: 170px;
       object-fit: contain;
       filter: drop-shadow(0 0 20px rgba(201,168,76,0.45));
       opacity: 0;
@@ -626,7 +626,6 @@
     <a href="#inicio">Inicio</a>
     <a href="#servicios">Servicios</a>
     <a href="#locales">Locales</a>
-    <a href="#franquicias">Franquicias</a>
     <a href="#trabaja">Trabajá con nosotros</a>
   </nav>
   <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -639,7 +638,6 @@
   <a href="#inicio" class="mobile-link">Inicio</a>
   <a href="#servicios" class="mobile-link">Servicios</a>
   <a href="#locales" class="mobile-link">Locales</a>
-  <a href="#franquicias" class="mobile-link">Franquicias</a>
   <a href="#trabaja" class="mobile-link">Trabajá con nosotros</a>
 </div>
 
@@ -653,7 +651,7 @@
         <p class="hero-tagline">Donde la belleza se convierte en ritual</p>
         <div class="hero-tagline-line"></div>
       </div>
-      <a href="https://wa.me/5491140935791?text=Hola!%20Quiero%20sacar%20un%20turno%20%F0%9F%98%8A" target="_blank" class="btn-cta">Reservar turno</a>
+      <a href="#locales" class="btn-cta">Reservar turno</a>
     </div>
     <div class="scroll-arrow" onclick="document.getElementById('quienes').scrollIntoView({behavior:'smooth'})">
       <span></span>
@@ -932,8 +930,9 @@
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         </div>
         <h3>Caballito</h3>
-        <p>Víctor Martínez 35<br />Caballito, Buenos Aires<br /><br />Tel: 9 11 4093-5791</p>
+        <p>Víctor Martínez 35<br />Caballito, Buenos Aires<br /><br />Tel: 9 11 3860-6366</p>
         <a href="https://www.google.com/maps/search/?api=1&query=Victor+Martinez+35+Caballito+Buenos+Aires" target="_blank" class="btn-map">Ver en Maps</a>
+        <a href="https://wa.me/5491138606366?text=Hola!%20Quiero%20sacar%20un%20turno%20%F0%9F%98%8A" target="_blank" class="btn-map" style="background:var(--gold);color:#fff;border-color:var(--gold);">Reservar turno</a>
       </div>
       <div class="local-card fade-in">
         <div class="local-icon">
@@ -942,43 +941,9 @@
         <h3>Villa Luro</h3>
         <p>Ramón Falcón 6378<br />Villa Luro, Buenos Aires<br /><br />Tel: 9 11 4093-5791</p>
         <a href="https://www.google.com/maps/search/?api=1&query=Ramon+Falcon+6378+Villa+Luro+Buenos+Aires" target="_blank" class="btn-map">Ver en Maps</a>
+        <a href="https://wa.me/5491140935791?text=Hola!%20Quiero%20sacar%20un%20turno%20%F0%9F%98%8A" target="_blank" class="btn-map" style="background:var(--gold);color:#fff;border-color:var(--gold);">Reservar turno</a>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- FRANQUICIAS -->
-<section id="franquicias">
-  <div class="franquicias-inner">
-    <p class="section-subtitle fade-in">Una oportunidad única</p>
-    <h2 class="section-title fade-in">Franquicias <span>Summerkoff</span></h2>
-    <div class="divider fade-in"></div>
-    <p class="fade-in">Sumarte a Summerkoff es sumarte a una marca con identidad, clientela fiel y procesos probados. Te brindamos todo el know-how, el respaldo de la marca y el acompañamiento para que puedas abrir tu propio local con confianza y visión de futuro.</p>
-    <form class="form-grid fade-in" id="formFranquicias">
-      <div class="form-group">
-        <label for="fr-nombre">Nombre completo</label>
-        <input type="text" id="fr-nombre" name="nombre" placeholder="Tu nombre y apellido" required />
-      </div>
-      <div class="form-group">
-        <label for="fr-email">Email</label>
-        <input type="email" id="fr-email" name="email" placeholder="tu@email.com" required />
-      </div>
-      <div class="form-group">
-        <label for="fr-tel">Teléfono</label>
-        <input type="tel" id="fr-tel" name="telefono" placeholder="+54 9 11 XXXX-XXXX" required />
-      </div>
-      <div class="form-group">
-        <label for="fr-ciudad">Ciudad / Provincia</label>
-        <input type="text" id="fr-ciudad" name="ciudad" placeholder="Buenos Aires" required />
-      </div>
-      <div class="form-group full">
-        <label for="fr-mensaje">Mensaje</label>
-        <textarea id="fr-mensaje" name="mensaje" placeholder="Contanos un poco sobre vos y por qué te interesa la franquicia..."></textarea>
-      </div>
-      <div class="full" style="text-align:center;">
-        <button type="submit" class="btn-submit">Enviar por WhatsApp</button>
-      </div>
-    </form>
   </div>
 </section>
 
@@ -1067,7 +1032,6 @@
       <a href="#quienes">Quiénes somos</a>
       <a href="#servicios">Servicios</a>
       <a href="#locales">Locales</a>
-      <a href="#franquicias">Franquicias</a>
       <a href="#trabaja">Trabajá con nosotros</a>
     </div>
     <div class="footer-col">
@@ -1132,18 +1096,6 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  // Form Franquicias → WhatsApp
-  document.getElementById('formFranquicias').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const nombre = this.nombre.value;
-    const email = this.email.value;
-    const tel = this.telefono.value;
-    const ciudad = this.ciudad.value;
-    const mensaje = this.mensaje.value;
-    const text = `*Consulta de Franquicia - Summerkoff*\n\n*Nombre:* ${nombre}\n*Email:* ${email}\n*Teléfono:* ${tel}\n*Ciudad/Provincia:* ${ciudad}\n*Mensaje:* ${mensaje}`;
-    window.open('https://wa.me/5491140935791?text=' + encodeURIComponent(text), '_blank');
-  });
 
   // Form Trabajá con Nosotros → WhatsApp
   document.getElementById('formTrabaja').addEventListener('submit', function(e) {
