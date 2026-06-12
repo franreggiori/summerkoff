@@ -330,7 +330,7 @@
       border-radius: 12px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.04);
       transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-      cursor: default;
+      cursor: pointer;
     }
     .service-card:hover {
       border-color: var(--gold);
@@ -615,6 +615,162 @@
       100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
     }
 
+    /* ── MODAL SERVICIO ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--white);
+      border-radius: 16px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+      animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.96) translateY(16px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-img {
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+      object-fit: cover;
+      border-radius: 16px 0 0 16px;
+      display: block;
+    }
+    .modal-body {
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 18px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: #aaa;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-cat {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .modal-title {
+      font-family: var(--font-title);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .modal-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--text-mid);
+    }
+    .modal-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .modal-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .modal-meta-item span:first-child {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .modal-meta-item span:last-child {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      font-family: var(--font-title);
+    }
+    .modal-benefits-title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: -10px;
+    }
+    .modal-benefits {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .modal-benefits li {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-mid);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-benefits li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .modal-wa {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: auto;
+      padding: 12px 24px;
+      background: #25D366;
+      color: var(--white);
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: background 0.3s;
+    }
+    .modal-wa:hover { background: #1da851; }
+    .modal-wa svg { width: 18px; height: 18px; fill: var(--white); }
+    @media (max-width: 640px) {
+      .modal-box { grid-template-columns: 1fr; }
+      .modal-img { height: 220px; border-radius: 16px 16px 0 0; min-height: unset; }
+      .modal-body { padding: 24px 20px; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       section { padding: 72px 24px; }
@@ -766,11 +922,11 @@
         </div>
         <div class="service-card">
           <span class="service-cat">Pies</span>
-          <h4>Esmaltado Tradicional</h4>
+          <h4>Esmaltado Tradicional Pies</h4>
         </div>
         <div class="service-card">
           <span class="service-cat">Pies</span>
-          <h4>Esmalte Semipermanente</h4>
+          <h4>Esmalte Semipermanente Pies</h4>
         </div>
         <div class="service-card">
           <span class="service-cat">Pies</span>
@@ -1071,6 +1227,35 @@
   </div>
 </footer>
 
+<!-- MODAL SERVICIO -->
+<div class="modal-overlay" id="serviceModal">
+  <div class="modal-box">
+    <img id="modalImg" src="" alt="" class="modal-img" />
+    <div class="modal-body">
+      <button class="modal-close" id="modalClose">&#x2715;</button>
+      <p class="modal-cat" id="modalCat"></p>
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-meta">
+        <div class="modal-meta-item">
+          <span>Duración</span>
+          <span id="modalDuration"></span>
+        </div>
+        <div class="modal-meta-item">
+          <span>Precio estimado</span>
+          <span id="modalPrice"></span>
+        </div>
+      </div>
+      <p class="modal-benefits-title">Beneficios</p>
+      <ul class="modal-benefits" id="modalBenefits"></ul>
+      <a href="#" id="modalWa" target="_blank" class="modal-wa">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Reservar este turno
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- WHATSAPP FLOTANTE -->
 <a href="https://wa.me/5491140935791?text=Hola!%20Quiero%20sacar%20un%20turno%20%F0%9F%98%8A" target="_blank" class="wa-float" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1119,6 +1304,299 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── DATOS DE SERVICIOS ──
+  const IMGS = {
+    manos:      'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&q=80',
+    manosBasic: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&q=80',
+    gel:        'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&q=80',
+    pies:       'https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=800&q=80',
+    podo:       'https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=800&q=80',
+    cejas:      'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80',
+    pestanas:   'https://images.unsplash.com/photo-1512207736890-6ffed8a84e8d?w=800&q=80',
+    masajes:    'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&q=80',
+    bronceado:  'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80',
+  };
+
+  const SERVICES = {
+    "Belleza de manos Mujer/Hombres con Exfoliación": {
+      cat: "Manos", img: IMGS.manos, duration: "50 min", price: "$5.500",
+      desc: "Tratamiento completo que combina exfoliación con productos premium para eliminar células muertas, hidratación profunda, cuidado de cutículas y moldeo de uñas. Ideal para mantener las manos suaves, nutridas e impecables.",
+      benefits: ["Exfoliación y eliminación de células muertas", "Hidratación profunda", "Cutículas prolijas", "Uñas con forma perfecta"]
+    },
+    "Esmaltado Tradicional Niña (hasta 10 años)": {
+      cat: "Manos", img: IMGS.manos, duration: "25 min", price: "$3.500",
+      desc: "Servicio pensado para las más chiquitas. Aplicación de esmalte tradicional de colores divertidos con mucho cuidado y paciencia. Un momento especial para ellas.",
+      benefits: ["Colores vibrantes y divertidos", "Producto suave y seguro", "Experiencia amigable para niñas", "Resultado prolijo"]
+    },
+    "Esmaltado Tradicional Manos": {
+      cat: "Manos", img: IMGS.manos, duration: "30 min", price: "$4.000",
+      desc: "Aplicación de esmalte de color tradicional sobre uñas prolijas. Incluye preparación de la uña y acabado impecable. La opción clásica con gran variedad de colores.",
+      benefits: ["Amplia paleta de colores", "Rápido y prolijo", "Sin daño a la uña natural", "Ideal para uso diario"]
+    },
+    "Esmalte Semipermanente": {
+      cat: "Manos", img: IMGS.manos, duration: "45 min", price: "$6.500",
+      desc: "Esmalte que se cura bajo lámpara UV/LED para un acabado duradero de hasta 3 semanas sin astillarse. Brillo intenso desde el primer día hasta el último.",
+      benefits: ["Dura hasta 3 semanas", "Sin astillas ni desgaste", "Brillo de gel", "No daña la uña natural"]
+    },
+    "Esmalte Fortalecedor": {
+      cat: "Manos", img: IMGS.manos, duration: "40 min", price: "$5.800",
+      desc: "Esmalte con complejo fortalecedor que nutre y protege la uña natural mientras le da color. Ideal para uñas frágiles o quebradizas que necesitan refuerzo.",
+      benefits: ["Fortalece la uña natural", "Previene roturas", "Color + tratamiento en uno", "Resultados visibles desde la primera aplicación"]
+    },
+    "Capping": {
+      cat: "Manos", img: IMGS.gel, duration: "60 min", price: "$8.500",
+      desc: "Técnica que consiste en aplicar una capa de gel o acrílico sobre la uña natural para protegerla y darle más resistencia, manteniendo su largo y forma natural.",
+      benefits: ["Protege la uña natural", "Mayor resistencia", "Aspecto natural", "Ideal para uñas débiles"]
+    },
+    "Capping Largo XL N°3": {
+      cat: "Manos", img: IMGS.gel, duration: "75 min", price: "$10.000",
+      desc: "Capping con extensión de largo XL utilizando tip número 3. Combinación de protección y extensión para uñas más largas con acabado impecable.",
+      benefits: ["Extensión de largo XL", "Alta resistencia", "Acabado natural o con color", "Larga duración"]
+    },
+    "Soft Gel": {
+      cat: "Manos", img: IMGS.gel, duration: "90 min", price: "$12.000",
+      desc: "Sistema de uñas en gel suave que se moldea sobre la uña natural o con tip. Flexible y resistente, con un acabado brillante y estético. Más liviano que el acrílico.",
+      benefits: ["Textura liviana y flexible", "Alta resistencia al quiebre", "Brillo de gel duradero", "Aspecto muy natural"]
+    },
+    "Esculpidas en Polygel": {
+      cat: "Manos", img: IMGS.gel, duration: "120 min", price: "$14.000",
+      desc: "Uñas esculpidas con Polygel, una mezcla entre gel y acrílico que ofrece lo mejor de ambos mundos. Livianas, resistentes y muy naturales al tacto.",
+      benefits: ["Ultra livianas", "No huelen como el acrílico", "Resistentes y duraderas", "Moldeo perfecto a medida"]
+    },
+    "Esculpidas en Polygel (a partir N°4)": {
+      cat: "Manos", img: IMGS.gel, duration: "130 min", price: "$15.500",
+      desc: "Esculpidas en Polygel con extensión de largo a partir del número 4. Para quienes buscan uñas largas, fuertes y de aspecto lujoso.",
+      benefits: ["Extensión larga y resistente", "Acabado premium", "Personalizable en forma y largo", "Liviana pese al largo"]
+    },
+    "Service Esculpidas / Soft Gel": {
+      cat: "Manos", img: IMGS.gel, duration: "60 min", price: "$7.000",
+      desc: "Mantenimiento de uñas esculpidas o Soft Gel ya colocadas. Incluye relleno, refuerzo y esmaltado para dejarlas como nuevas sin tener que retirarlas.",
+      benefits: ["Ahorra tiempo y dinero", "Mantiene el trabajo anterior", "Uñas como recién hechas", "Fortalece el crecimiento"]
+    },
+
+    // PIES
+    "Belleza de Pies (no incluye durezas)": {
+      cat: "Pies", img: IMGS.pies, duration: "45 min", price: "$5.500",
+      desc: "Tratamiento completo de belleza de pies: limado, prolijo de cutículas, hidratación y cuidado general. No incluye tratamiento de durezas o callosidades.",
+      benefits: ["Pies hidratados y suaves", "Cutículas cuidadas", "Uñas con forma prolija", "Sensación de frescura"]
+    },
+    "Esmaltado Tradicional Pies": {
+      cat: "Pies", img: IMGS.pies, duration: "25 min", price: "$3.500",
+      desc: "Aplicación de esmalte de color tradicional en uñas de los pies con preparación previa prolija.",
+      benefits: ["Colores variados", "Acabado prolijo", "Rápido y sencillo", "Ideal para el día a día"]
+    },
+    "Esmalte Semipermanente Pies": {
+      cat: "Pies", img: IMGS.pies, duration: "40 min", price: "$5.500",
+      desc: "Semipermanente en uñas de los pies para un color duradero de hasta 4 semanas. Resistente al agua y a la fricción del calzado.",
+      benefits: ["Dura hasta 4 semanas", "Resistente al calzado", "Sin astillas", "Brillo intenso"]
+    },
+    "Capping Pies": {
+      cat: "Pies", img: IMGS.pies, duration: "60 min", price: "$8.000",
+      desc: "Aplicación de capping en uñas de los pies para mayor resistencia y protección. Ideal para quienes tienen uñas débiles o quebradizas en los pies.",
+      benefits: ["Protección extra", "Mayor resistencia", "Aspecto natural", "Larga duración"]
+    },
+    "PodoEstetica SIN esmaltado": {
+      cat: "Pies", img: IMGS.podo, duration: "60 min", price: "$7.500",
+      desc: "Tratamiento podoestético completo que incluye remoción de durezas, hidratación profunda, limado y prolijo de cutículas. Sin esmaltado final.",
+      benefits: ["Remoción de durezas y callos", "Hidratación profunda", "Pies suaves y sanos", "Cutículas cuidadas"]
+    },
+    "PodoEstetica con Tradicional": {
+      cat: "Pies", img: IMGS.podo, duration: "75 min", price: "$9.000",
+      desc: "Tratamiento podoestético completo con remoción de durezas e hidratación, más esmaltado tradicional a elección.",
+      benefits: ["Podoestética completa", "Remoción de durezas", "Color tradicional duradero", "Pies perfectos"]
+    },
+    "PodoEstetica con Semipermanente": {
+      cat: "Pies", img: IMGS.podo, duration: "80 min", price: "$10.500",
+      desc: "Podoestética con todos sus beneficios más esmalte semipermanente para un color que dura semanas. La combinación ideal de salud y estética.",
+      benefits: ["Remoción de durezas", "Esmalte que dura semanas", "Hidratación profunda", "Pies estéticos y sanos"]
+    },
+    "PodoEstetica con Capping": {
+      cat: "Pies", img: IMGS.podo, duration: "90 min", price: "$12.000",
+      desc: "Tratamiento podoestético completo con capping en uñas de los pies. La opción más completa para quienes quieren pies perfectos con máxima protección.",
+      benefits: ["Todo lo de la podoestética", "Capping protector", "Máxima resistencia", "Resultado premium"]
+    },
+
+    // CEJAS
+    "Perfilado": {
+      cat: "Cejas", img: IMGS.cejas, duration: "20 min", price: "$3.500",
+      desc: "Diseño y depilación de cejas según la forma del rostro para un perfilado prolijo y natural. Con hilo, pinza o cera según el caso.",
+      benefits: ["Diseño personalizado", "Realza la mirada", "Rápido y preciso", "Resultado natural"]
+    },
+    "Henna + Perfilado": {
+      cat: "Cejas", img: IMGS.cejas, duration: "40 min", price: "$6.000",
+      desc: "Perfilado de cejas combinado con aplicación de henna para definir, rellenar y dar color de forma natural. Ideal para cejas con poco pelo o espaciadas.",
+      benefits: ["Rellena espacios vacíos", "Color natural duradero", "Efecto fuller y definido", "Dura entre 2 y 4 semanas"]
+    },
+    "Tinte (ideal canas) / Henna": {
+      cat: "Cejas", img: IMGS.cejas, duration: "30 min", price: "$5.000",
+      desc: "Aplicación de tinte o henna en cejas para cubrir canas y unificar el color. Especialmente recomendado para quienes tienen canas en las cejas.",
+      benefits: ["Cubre canas al 100%", "Color uniforme y natural", "Aplicación rápida", "Resultado inmediato"]
+    },
+    "Laminado": {
+      cat: "Cejas", img: IMGS.cejas, duration: "60 min", price: "$9.000",
+      desc: "Tratamiento que estira y fija los pelos de las cejas en la dirección deseada, dando un efecto de mayor volumen, orden y un acabado de cejas perfectamente peinadas.",
+      benefits: ["Efecto cejas peinadas todo el día", "Mayor volumen y densidad", "Dura hasta 6 semanas", "Sin esfuerzo diario"]
+    },
+    "Laminado Nutritivo + Perfilado": {
+      cat: "Cejas", img: IMGS.cejas, duration: "75 min", price: "$11.000",
+      desc: "Laminado con complejo nutritivo que hidrata el pelo de las cejas mientras las fija. Incluye perfilado para un resultado completo y profesional.",
+      benefits: ["Laminado + nutrición", "Pelo de ceja hidratado", "Diseño prolijo", "Efecto duradero"]
+    },
+    "Laminado Nutritivo + Perfilado + Henna o Tinte": {
+      cat: "Cejas", img: IMGS.cejas, duration: "90 min", price: "$13.000",
+      desc: "El tratamiento más completo de cejas: laminado nutritivo, perfilado profesional y color con henna o tinte. Resultado impactante y de larga duración.",
+      benefits: ["Tratamiento 3 en 1", "Color + volumen + forma", "Dura hasta 6 semanas", "Resultado de profesional"]
+    },
+
+    // PESTAÑAS
+    "Lifting Nutritivo (Botox Melania)": {
+      cat: "Pestañas", img: IMGS.pestanas, duration: "60 min", price: "$12.000",
+      desc: "Tratamiento que eleva y curva las pestañas naturales desde la raíz, con complejo nutritivo que las hidrata y fortalece. Efecto de rímel permanente sin necesidad de maquillaje.",
+      benefits: ["Eleva las pestañas naturales", "Hidratación y nutrición profunda", "Dura entre 6 y 8 semanas", "Sin maquillaje diario"]
+    },
+    "Lifting Nutritivo c/Tinte (Botox Melania)": {
+      cat: "Pestañas", img: IMGS.pestanas, duration: "75 min", price: "$14.000",
+      desc: "Lifting nutritivo más tinte para oscurecer las pestañas y potenciar el efecto. Mirada intensa y definida desde el despertar.",
+      benefits: ["Lifting + color oscuro", "Pestañas definidas sin rímel", "Nutrición incluida", "Dura hasta 8 semanas"]
+    },
+    "Botox sin Tinte": {
+      cat: "Pestañas", img: IMGS.pestanas, duration: "60 min", price: "$11.000",
+      desc: "Tratamiento de Botox para pestañas que repara, nutre e hidrata en profundidad. Las deja suaves, brillantes y fortalecidas. Sin tinte.",
+      benefits: ["Reparación profunda", "Pestañas suaves y brillantes", "Reduce frizz y quiebre", "Aplicación rápida"]
+    },
+    "Botox con Tinte": {
+      cat: "Pestañas", img: IMGS.pestanas, duration: "75 min", price: "$13.000",
+      desc: "Botox reparador para pestañas más tinte para oscurecer y definir. La combinación ideal para pestañas dañadas que necesitan recuperación y color.",
+      benefits: ["Reparación + color", "Pestañas nutridas y oscuras", "Efecto inmediato", "Dura hasta 6 semanas"]
+    },
+    "Clásicas PxP / Service Ext. Clásicas": {
+      cat: "Pestañas", img: IMGS.pestanas, duration: "120 min / 60 min", price: "$16.000 / $8.000",
+      desc: "Extensiones clásicas pelo a pelo: se coloca una extensión por pestaña natural para un resultado delicado y muy natural. El service mantiene el trabajo existente.",
+      benefits: ["Mirada natural y delicada", "Personalizables en largo y curvatura", "Sin dañar la pestaña natural", "Resultado de alta precisión"]
+    },
+    "Volumen Bajo - Efecto Rimel / Service Efecto Rimel": {
+      cat: "Pestañas", img: IMGS.pestanas, duration: "120 min / 60 min", price: "$17.000 / $8.500",
+      desc: "Extensiones en volumen bajo que imitan el efecto del rímel: pestañas más tupidas y definidas sin llegar a un volumen dramático. Natural pero con impacto.",
+      benefits: ["Efecto rímel permanente", "Mayor densidad y volumen", "Mirada definida", "Ideal para el día a día"]
+    },
+    "Volumen Medio 3D / Service Volumen Medio": {
+      cat: "Pestañas", img: IMGS.pestanas, duration: "150 min / 75 min", price: "$19.000 / $9.500",
+      desc: "Extensiones en volumen 3D: se colocan fanáticos de 3 pestañas por cada una natural para una mirada llena y femenina sin exagerar.",
+      benefits: ["Volumen 3D equilibrado", "Mirada femenina y llena", "Larga duración", "Efecto glamoroso diario"]
+    },
+    "Volumen Alto 4 o 5 / Service Volumen Alto": {
+      cat: "Pestañas", img: IMGS.pestanas, duration: "180 min / 90 min", price: "$22.000 / $11.000",
+      desc: "Volumen alto con fanáticos de 4 a 5 pestañas por cada natural. Mirada dramática y muy llamativa. Para quienes buscan impacto total.",
+      benefits: ["Máximo volumen y densidad", "Mirada de impacto", "Ideal para ocasiones especiales", "Gran durabilidad"]
+    },
+    "Volumen Ruso / Service Volumen Ruso": {
+      cat: "Pestañas", img: IMGS.pestanas, duration: "180 min / 90 min", price: "$24.000 / $12.000",
+      desc: "Técnica rusa con fanáticos de 6 a 8 pestañas ultra finas por cada natural. Volumen extremo con un toque artístico. Requiere alta especialización.",
+      benefits: ["Volumen ruso extremo", "Pestañas ultra finas y livianas", "Alta especialización", "Resultado de pasarela"]
+    },
+    "Mega Volumen / Service Mega Volumen": {
+      cat: "Pestañas", img: IMGS.pestanas, duration: "210 min / 90 min", price: "$27.000 / $13.500",
+      desc: "El nivel más alto de volumen en extensiones: mega fanáticos con densidad máxima. Mirada absolutamente espectacular.",
+      benefits: ["Máxima densidad posible", "Efecto espectacular", "Pestañas ultra livianas", "Resultado de alta gama"]
+    },
+    "Tecnológicas MAS / Service Tecnológicas MAS": {
+      cat: "Pestañas", img: IMGS.pestanas, duration: "180 min / 90 min", price: "$25.000 / $12.500",
+      desc: "Extensiones con técnica MAS (Micro Adhesión Segmentada) de última generación. Mayor retención y flexibilidad para un resultado de larga duración.",
+      benefits: ["Técnica de última generación", "Mayor retención", "Pestañas más flexibles", "Duración extendida"]
+    },
+
+    // MASAJES
+    "Masaje Relajante / Descontracturante 30 min": {
+      cat: "Masajes", img: IMGS.masajes, duration: "30 min", price: "$8.000",
+      desc: "Sesión de masaje relajante o descontracturante de 30 minutos. Ideal para una pausa express que alivia tensiones musculares y calma el estrés del día.",
+      benefits: ["Alivia tensiones musculares", "Reduce el estrés", "Mejora la circulación", "Sensación de bienestar inmediata"]
+    },
+    "Masaje Relajante / Descontracturante 60 min": {
+      cat: "Masajes", img: IMGS.masajes, duration: "60 min", price: "$13.000",
+      desc: "Masaje de cuerpo completo de 60 minutos con técnicas relajantes o descontracturantes según la necesidad. Libera tensiones acumuladas y revitaliza el cuerpo.",
+      benefits: ["Cuerpo completo", "Descontractura zonas tensas", "Profunda relajación", "Mejora el sueño"]
+    },
+    "Masaje Relajante / Descontracturante 90 min": {
+      cat: "Masajes", img: IMGS.masajes, duration: "90 min", price: "$18.000",
+      desc: "La experiencia de masaje más completa: 90 minutos de trabajo muscular profundo y relajante. Para una recuperación total del cuerpo y la mente.",
+      benefits: ["Máxima relajación", "Tratamiento muscular profundo", "Cuerpo completamente revitalizado", "Experiencia de spa premium"]
+    },
+    "Drenaje Linfático 60 min": {
+      cat: "Masajes", img: IMGS.masajes, duration: "60 min", price: "$15.000",
+      desc: "Masaje de drenaje linfático manual que estimula el sistema linfático para reducir la retención de líquidos, mejorar la circulación y desinflamar el cuerpo.",
+      benefits: ["Reduce retención de líquidos", "Desinflamante", "Mejora la circulación linfática", "Ideal postoperatorio o pre-evento"]
+    },
+    "Maderoterapia x Zonas 60 min": {
+      cat: "Masajes", img: IMGS.masajes, duration: "60 min", price: "$14.000",
+      desc: "Técnica de masaje con instrumentos de madera que tonifica, moldea y reduce medidas en zonas específicas. Activa la circulación y combate la celulitis.",
+      benefits: ["Reduce medidas", "Combate la celulitis", "Tonifica y moldea", "Activa la circulación"]
+    },
+    "Masaje Reductor": {
+      cat: "Masajes", img: IMGS.masajes, duration: "60 min", price: "$14.000",
+      desc: "Masaje con técnicas reductoras que trabajan en profundidad para disminuir el tejido adiposo localizado, mejorar el contorno corporal y activar el metabolismo.",
+      benefits: ["Reduce grasa localizada", "Mejora el contorno corporal", "Activa el metabolismo", "Resultados visibles con sesiones regulares"]
+    },
+
+    // BRONCEADO
+    "Cuerpo Completo (cuerpo y rostro)": {
+      cat: "Bronceado Natural", img: IMGS.bronceado, duration: "30 min", price: "$12.000",
+      desc: "Aplicación de bronceado natural en cuerpo completo incluyendo rostro. Resultado uniforme, progresivo y sin necesidad de exponerse al sol.",
+      benefits: ["Bronceado uniforme", "Sin exposición solar", "Rostro y cuerpo incluidos", "Resultado natural y duradero"]
+    },
+    "Medio Cuerpo (cintura para arriba con rostro)": {
+      cat: "Bronceado Natural", img: IMGS.bronceado, duration: "20 min", price: "$8.000",
+      desc: "Bronceado natural en la parte superior del cuerpo (cintura para arriba) incluyendo rostro. Ideal para escotes, brazos y cara.",
+      benefits: ["Bronceado superior uniforme", "Realza el escote", "Incluye rostro", "Sin líneas de bronceado"]
+    },
+    "Solo Piernas": {
+      cat: "Bronceado Natural", img: IMGS.bronceado, duration: "15 min", price: "$6.000",
+      desc: "Aplicación de bronceado natural solo en piernas. Perfecto para disimular imperfecciones y lucir piernas perfectas en cualquier época del año.",
+      benefits: ["Piernas con color uniforme", "Disimula imperfecciones", "Efecto piel saludable", "Aplicación rápida"]
+    },
+    "Rostro y Escote": {
+      cat: "Bronceado Natural", img: IMGS.bronceado, duration: "15 min", price: "$5.500",
+      desc: "Bronceado natural aplicado en rostro y escote para un look luminoso y saludable. Ideal para eventos o cuando querés lucir bronceada sin sol.",
+      benefits: ["Luminosidad inmediata", "Piel con aspecto saludable", "Ideal para eventos", "Larga duración"]
+    }
+  };
+
+  // ── MODAL LOGIC ──
+  const modal = document.getElementById('serviceModal');
+  const modalClose = document.getElementById('modalClose');
+
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const name = card.querySelector('h4').textContent.trim();
+      const data = SERVICES[name];
+      if (!data) return;
+
+      document.getElementById('modalImg').src = data.img;
+      document.getElementById('modalImg').alt = name;
+      document.getElementById('modalCat').textContent = data.cat;
+      document.getElementById('modalTitle').textContent = name;
+      document.getElementById('modalDesc').textContent = data.desc;
+      document.getElementById('modalDuration').textContent = data.duration;
+      document.getElementById('modalPrice').textContent = data.price;
+
+      const ul = document.getElementById('modalBenefits');
+      ul.innerHTML = data.benefits.map(b => `<li>${b}</li>`).join('');
+
+      const msg = encodeURIComponent(`Hola! Quiero sacar un turno para *${name}* 😊`);
+      document.getElementById('modalWa').href = `https://wa.me/5491140935791?text=${msg}`;
+
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
   // Form Trabajá con Nosotros → WhatsApp
   document.getElementById('formTrabaja').addEventListener('submit', function(e) {
